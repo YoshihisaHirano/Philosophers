@@ -21,6 +21,12 @@ void	change_status(int code, struct timeval now, t_philo *th)
 	}
 	else if (code == 2 && th->set->timers)
 		(th->set->timers)[th->id - 1].has_forks = 0;
+	else if (code == 3 && th->set->timers)
+	{
+		(th->set->timers)[th->id - 1].meals_no++;
+		printf("%d - philo, %d - meals_no\n", th->id, (th->set->timers)[th->id
+		- 1].meals_no);
+	}
 }
 
 void	message(char *code, struct timeval now, t_philo *th)

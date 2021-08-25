@@ -24,7 +24,7 @@ int	check_meals(t_settings *set)
 		return (0);
 	while (i < set->thread_no)
 	{
-		if (set->timers[i].meals_no >= set->must_eat)
+		if ((set->timers[i]).meals_no >= set->must_eat)
 			res++;
 		i++;
 	}

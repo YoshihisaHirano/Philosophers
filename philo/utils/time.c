@@ -44,6 +44,7 @@ void	set_timers(t_settings *set)
 	{
 		set->timers[i].time = now;
 		set->timers[i].has_forks = 0;
+		set->timers[i].meals_no = 0;
 		i++;
 	}
 }

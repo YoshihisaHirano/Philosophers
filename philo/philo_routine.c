@@ -96,8 +96,7 @@ void	eating_routine(t_philo *th)
 		return ;
 	message(EAT, now, th);
 	ft_usleep(th->set->eat_time);
-	if (th->set->timers)
-		(th->set->timers)[th->id - 1].meals_no++;
+	change_status(3, now, th);
 	if (release_forks(th, left_fork, right_fork) > 0)
 		return ;
 	change_status(2, now, th);
