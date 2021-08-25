@@ -25,16 +25,22 @@ void	change_status(int code, struct timeval now, t_philo *th)
 
 void	message(char *code, struct timeval now, t_philo *th)
 {
-	char	*philo_no;
+	char	*temp2;
 	char	*temp;
+	char	*str_id;
+	char	*str_ms;
 
-	temp = ft_strjoin(ft_itoa(ms(now, th->set)), " ");
-	philo_no = ft_strjoin(temp, ft_itoa(th->id));
+	str_id = ft_itoa(th->id);
+	str_ms = ft_itoa(ms(now, th->set));
+	temp = ft_strjoin(str_ms, " ");
+	temp2 = ft_strjoin(temp, str_id);
 	free(temp);
-	temp = ft_strjoin(philo_no, code);
-	free(philo_no);
+	temp = ft_strjoin(temp2, code);
+	free(temp2);
 	pthread_mutex_lock(&th->set->print);
 	ft_putstr_fd(temp, 1);
 	pthread_mutex_unlock(&th->set->print);
 	free(temp);
+	free(str_ms);
+	free(str_id);
 }

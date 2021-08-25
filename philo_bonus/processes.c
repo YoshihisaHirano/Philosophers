@@ -36,7 +36,7 @@ void	create_processes(t_settings *set, t_philo *philos)
 		if (pid < 0)
 			error_exit(PROC_ISSUE, set, philos);
 		else if (pid == 0)
-			philo_routine(philos + i);
+			philo_routine(philos[i]);
 	}
 	ft_usleep(set->philo_no * 7);
 	start_sig(set);

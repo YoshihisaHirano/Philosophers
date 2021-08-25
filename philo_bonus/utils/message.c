@@ -12,29 +12,41 @@
 
 #include "../philo_bonus.h"
 
+void	print_death(t_philo *p)
+{
+	struct timeval	t;
+
+	sem_wait(p->set->print);
+	gettimeofday(&t, NULL);
+	printf("%d %d died\n", ms(t, p->set), p->id);
+}
+
 void	message(t_philo *p, char *code)
 {
 	struct timeval	t;
-	char			*philo_no;
 	char			*temp;
+	char			*temp2;
+	char			*str_id;
+	char			*str_ms;
 
 	if (!code)
-	{
-		sem_wait(p->set->print);
-		gettimeofday(&t, NULL);
-		printf("%d %d died\n", ms(t, p->set), p->id);
-	}
+		print_death(p);
 	else
 	{
 		gettimeofday(&t, NULL);
-		temp = ft_strjoin(ft_itoa(ms(t, p->set)), " ");
-		philo_no = ft_strjoin(temp, ft_itoa(p->id));
+		str_ms = ft_itoa(ms(t, p->set));
+		str_id = ft_itoa(p->id);
+		temp = ft_strjoin(str_ms, " ");
+		temp2 = ft_strjoin(temp, str_id);
 		free(temp);
-		temp = ft_strjoin(philo_no, code);
-		free(philo_no);
+		temp = ft_strjoin(temp2, code);
+		free(temp2);
 		sem_wait(p->set->print);
 		ft_putstr_fd(temp, 1);
 		sem_post(p->set->print);
+		free(temp);
+		free(str_id);
+		free(str_ms);
 	}
 }
 

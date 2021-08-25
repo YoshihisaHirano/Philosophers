@@ -73,7 +73,7 @@ void		sem_start(t_settings *set);
 void		kill_processes(t_settings *set, t_philo *philos);
 void		create_processes(t_settings *set, t_philo *philos);
 void		check_meals(t_settings *set);
-void		philo_routine(t_philo *philo);
+void		philo_routine(t_philo philo);
 void		create_watcher(t_philo *philo);
 void		close_sems(t_settings *set);
 

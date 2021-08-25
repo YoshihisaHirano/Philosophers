@@ -43,7 +43,7 @@ void	*exit_check(void *args)
 
 	philo = (t_philo *)args;
 	sem_wait(philo->set->exit_sig);
-	free((t_philo *)philo->set->philos);
+	free(philo->set->philos);
 	exit(0);
 }
 

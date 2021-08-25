@@ -16,6 +16,7 @@ void	settings_init(t_settings *set)
 {
 	*set = (t_settings){0};
 	set->must_eat = -1;
+	set->philos = NULL;
 }
 
 void	parse_args(t_settings *set, char **argv, int argc)
@@ -53,6 +54,9 @@ t_philo	*create_philos(t_settings *set)
 		philos[i - 1].id = i;
 		philos[i - 1].meals_no = 0;
 		philos[i - 1].set = set;
+		philos[i - 1].started = 0;
+		philos[i - 1].has_forks = 0;
+		philos[i - 1].last_meal = 0;
 		i++;
 	}
 	set->philos = philos;

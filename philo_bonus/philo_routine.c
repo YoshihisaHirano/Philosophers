@@ -31,12 +31,7 @@ void	philo_eat(t_philo *philo)
 
 void	form_queue(t_philo *philo)
 {
-	if (philo->set->philo_no % 2 != 0 && philo->id % 2 != 0 && philo->id == 1)
-	{
-		message(philo, THINK);
-		ft_usleep(philo->set->eat_time + (philo->set->eat_time / 4));
-	}
-	else if (philo->id % 2 == 0)
+	if (philo->id % 2 == 0)
 	{
 		message(philo, THINK);
 		ft_usleep(philo->set->eat_time);
@@ -45,22 +40,21 @@ void	form_queue(t_philo *philo)
 		message(philo, THINK);
 }
 
-void	philo_routine(t_philo *philo)
+void	philo_routine(t_philo philo)
 {
-	philo->started = 0;
-	create_watcher(philo);
-	sem_wait(philo->set->sim_start);
-	philo->set->start_time = get_time();
-	philo->last_meal = philo->set->start_time;
-	philo->started = 1;
-	form_queue(philo);
+	create_watcher(&philo);
+	sem_wait(philo.set->sim_start);
+	philo.set->start_time = get_time();
+	philo.last_meal = philo.set->start_time;
+	philo.started = 1;
+	form_queue(&philo);
 	while (1)
 	{
-		philo_eat(philo);
-		if (philo->meals_no == philo->set->must_eat)
-			sem_post(philo->set->all_ate);
-		message(philo, SLEEP);
-		ft_usleep(philo->set->sleep_time);
-		message(philo, THINK);
+		philo_eat(&philo);
+		if (philo.meals_no == philo.set->must_eat)
+			sem_post(philo.set->all_ate);
+		message(&philo, SLEEP);
+		ft_usleep(philo.set->sleep_time);
+		message(&philo, THINK);
 	}
 }
