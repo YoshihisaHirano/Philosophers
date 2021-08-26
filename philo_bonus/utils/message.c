@@ -50,23 +50,21 @@ void	message(t_philo *p, char *code)
 	}
 }
 
-void	error_exit(int code, t_settings *set, t_philo *philos)
+void	error_exit(int code, t_settings *set)
 {
 	if (code == SEM_ISSUE)
 		printf("Semaphore opening error\n");
 	if (code == FORMAT_ISSUE)
 		printf("Wrong format of the argument(s)\n");
-	if (code == MEM_ISSUE)
-		printf("Memory allocation error\n");
 	if (code == PROC_ISSUE)
 	{
 		printf("Process creation error\n");
-		kill_processes(set, philos);
+		kill_processes(set);
 	}
 	if (code == THREAD_ISSUE)
 	{
 		printf("Thread creation error\n");
-		kill_processes(set, philos);
+		kill_processes(set);
 	}
 	exit(1);
 }

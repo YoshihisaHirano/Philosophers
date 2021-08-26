@@ -31,27 +31,27 @@ void	sem_start(t_settings *st)
 	sem_unlink("forks");
 	st->forks = sem_open("forks", O_CREAT | O_EXCL, 0644, st->philo_no);
 	if (st->forks == SEM_FAILED)
-		error_exit(SEM_ISSUE, st, NULL);
+		error_exit(SEM_ISSUE, st);
 	sem_unlink("sim_stop");
 	st->sim_stop = sem_open("sim_stop", O_CREAT | O_EXCL, 0644, 1);
 	if (st->sim_stop == SEM_FAILED)
-		error_exit(SEM_ISSUE, st, NULL);
+		error_exit(SEM_ISSUE, st);
 	sem_unlink("print");
 	st->print = sem_open("print", O_CREAT | O_EXCL, 0644, 1);
 	if (st->print == SEM_FAILED)
-		error_exit(SEM_ISSUE, st, NULL);
+		error_exit(SEM_ISSUE, st);
 	sem_unlink("sim_start");
 	st->sim_start = sem_open("sim_start", O_CREAT | O_EXCL, 0644, st->philo_no);
 	if (st->print == SEM_FAILED)
-		error_exit(SEM_ISSUE, st, NULL);
+		error_exit(SEM_ISSUE, st);
 	sem_unlink("all_ate");
 	st->all_ate = sem_open("all_ate", O_CREAT | O_EXCL, 0644, 1);
 	if (st->all_ate == SEM_FAILED)
-		error_exit(SEM_ISSUE, st, NULL);
+		error_exit(SEM_ISSUE, st);
 	sem_unlink("exit_sig");
 	st->exit_sig = sem_open("exit_sig", O_CREAT | O_EXCL, 0644, st->philo_no);
 	if (st->exit_sig == SEM_FAILED)
-		error_exit(SEM_ISSUE, st, NULL);
+		error_exit(SEM_ISSUE, st);
 	sem_setup(st);
 }
 

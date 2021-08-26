@@ -43,7 +43,6 @@ void	*exit_check(void *args)
 
 	philo = (t_philo *)args;
 	sem_wait(philo->set->exit_sig);
-	free(philo->set->philos);
 	exit(0);
 }
 
@@ -55,15 +54,8 @@ void	create_watcher(t_philo *philo)
 
 	error = pthread_create(&death_watcher, NULL, death_check, philo);
 	if (error)
-	{
-		free(philo->set->philos);
-		error_exit(THREAD_ISSUE, philo->set, philo->set->philos);
-	}
+		error_exit(THREAD_ISSUE, philo->set);
 	error = pthread_create(&exit_watcher, NULL, exit_check, philo);
 	if (error)
-	{
-		free(philo->set->philos);
-		pthread_detach(death_watcher);
-		error_exit(THREAD_ISSUE, philo->set, philo->set->philos);
-	}
+		error_exit(THREAD_ISSUE, philo->set);
 }

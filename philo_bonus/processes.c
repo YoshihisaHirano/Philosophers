@@ -34,7 +34,7 @@ void	create_processes(t_settings *set, t_philo *philos)
 	{
 		pid = fork();
 		if (pid < 0)
-			error_exit(PROC_ISSUE, set, philos);
+			error_exit(PROC_ISSUE, set);
 		else if (pid == 0)
 			philo_routine(philos[i]);
 	}
@@ -42,13 +42,12 @@ void	create_processes(t_settings *set, t_philo *philos)
 	start_sig(set);
 }
 
-void	kill_processes(t_settings *set, t_philo *philos)
+void	kill_processes(t_settings *set)
 {
 	int	i;
 
 	i = -1;
 	while (++i < set->philo_no)
 		sem_post(set->exit_sig);
-	free(philos);
 	usleep(500);
 }

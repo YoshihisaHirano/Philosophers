@@ -22,8 +22,7 @@
 # include <semaphore.h>
 # include <signal.h>
 # define SEM_ISSUE 1
-# define MEM_ISSUE 2
-# define PROC_ISSUE 3
+# define PROC_ISSUE 2
 # define THREAD_ISSUE 4
 # define FORMAT_ISSUE 5
 # define EAT " is eating\n"
@@ -68,9 +67,9 @@ void		ft_usleep(int time);
 void		message(t_philo *philo, char *code);
 long int	get_time(void);
 int			ms(struct timeval curr, t_settings *set);
-void		error_exit(int code, t_settings *set, t_philo *philos);
+void		error_exit(int code, t_settings *set);
 void		sem_start(t_settings *set);
-void		kill_processes(t_settings *set, t_philo *philos);
+void		kill_processes(t_settings *set);
 void		create_processes(t_settings *set, t_philo *philos);
 void		check_meals(t_settings *set);
 void		philo_routine(t_philo philo);

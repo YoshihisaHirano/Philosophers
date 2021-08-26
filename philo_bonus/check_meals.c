@@ -39,5 +39,5 @@ void	check_meals(t_settings *set)
 
 	error = pthread_create(&waiter, NULL, waiter_routine, set);
 	if (error)
-		error_exit(THREAD_ISSUE, set, set->philos);
+		error_exit(THREAD_ISSUE, set);
 }

@@ -29,7 +29,7 @@ void	parse_args(t_settings *set, char **argv, int argc)
 	{
 		args[i] = ft_atoi(argv[i + 1]);
 		if (args[i] < 0 || args[0] == 0)
-			error_exit(FORMAT_ISSUE, set, NULL);
+			error_exit(FORMAT_ISSUE, set);
 		i++;
 	}
 	set->philo_no = args[0];
@@ -40,14 +40,10 @@ void	parse_args(t_settings *set, char **argv, int argc)
 		set->must_eat = args[4];
 }
 
-t_philo	*create_philos(t_settings *set)
+t_philo	*create_philos(t_settings *set, t_philo	*philos)
 {
-	t_philo	*philos;
 	int		i;
 
-	philos = malloc(set->philo_no * sizeof(t_philo));
-	if (!philos)
-		error_exit(MEM_ISSUE, NULL, NULL);
 	i = 1;
 	while (i <= set->philo_no)
 	{
@@ -66,7 +62,7 @@ t_philo	*create_philos(t_settings *set)
 int	main(int argc, char **argv)
 {
 	t_settings	set;
-	t_philo		*philos;
+	t_philo		philos[200];
 
 	if (argc < 5)
 	{
@@ -76,10 +72,10 @@ int	main(int argc, char **argv)
 	settings_init(&set);
 	parse_args(&set, argv, argc);
 	sem_start(&set);
-	philos = create_philos(&set);
+	create_philos(&set, philos);
 	create_processes(&set, philos);
 	sem_wait(set.sim_stop);
-	kill_processes(&set, philos);
+	kill_processes(&set);
 	close_sems(&set);
 	return (0);
 }
