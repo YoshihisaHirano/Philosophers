@@ -31,6 +31,7 @@ int	create_forks(t_settings *set)
 		if (error)
 		{
 			printf("Mutex init error\n");
+			destroy_mutexes(set);
 			free(forks);
 			return (1);
 		}
@@ -40,14 +41,30 @@ int	create_forks(t_settings *set)
 	return (0);
 }
 
+int	death_mutex(pthread_mutex_t *mx)
+{
+	int	error;
+
+	error = pthread_mutex_init(mx, NULL);
+	if (error)
+	{
+		printf("Mutex init error\n");
+		return (1);
+	}
+	return (0);
+}
+
 int	destroy_mutexes(t_settings *set)
 {
-	int	i;
+	int		i;
+	t_philo	*philos;
 
 	i = 0;
+	philos = (t_philo *)(set->philos);
 	while (i < set->thread_no)
 	{
 		pthread_mutex_destroy(&(set->forks[i]));
+		pthread_mutex_destroy(&(philos[i].death_mutex));
 		i++;
 	}
 	pthread_mutex_destroy(&set->print);

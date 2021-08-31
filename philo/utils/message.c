@@ -16,17 +16,18 @@ void	change_status(int code, struct timeval now, t_philo *th)
 {
 	if (code == 1)
 		th->time = now;
-	else if (code == 3)
+	else if (code == 2)
 		th->meals_no++;
 }
 
-void	message(char *code, struct timeval now, t_philo *th)
+void	message(char *code, struct timeval now, t_philo *th, int flag)
 {
 	char	*temp2;
 	char	*temp;
 	char	*str_id;
 	char	*str_ms;
 
+	(void)flag;
 	str_id = ft_itoa(th->id);
 	str_ms = ft_itoa(ms(now, th->set));
 	temp = ft_strjoin(str_ms, " ");

@@ -14,11 +14,16 @@
 
 int	free_memory(t_settings *set, pthread_t *philo, t_philo *ids, int *res)
 {
-	free(philo);
-	free(ids);
+	int	error;
+
+	error = destroy_mutexes(set);
+	if (philo)
+		free(philo);
+	if (ids)
+		free(ids);
 	if (res)
 		free(res);
-	return (destroy_mutexes(set));
+	return (error);
 }
 
 void	finish_threads(pthread_t *philos, t_settings *set)

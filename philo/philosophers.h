@@ -21,6 +21,7 @@
 # define THINK " is thinking\n"
 # define SLEEP " is sleeping\n"
 # define TAKE_FORK " has taken a fork\n"
+# define DIED " died\n"
 
 typedef struct s_settings
 {
@@ -42,6 +43,7 @@ typedef struct s_philo
 	int				stop;
 	struct timeval	time;
 	int				meals_no;
+	pthread_mutex_t	death_mutex;
 }	t_philo;
 
 int		ft_atoi(const char *nptr);
@@ -55,9 +57,10 @@ int		ms(struct timeval curr, t_settings *set);
 int		dead_time(struct timeval curr, t_settings *set, int i);
 void	set_timers(t_philo *philos_id);
 int		destroy_mutexes(t_settings *set);
+int		death_mutex(pthread_mutex_t *mx);
 void	ft_usleep(int time);
 void	change_status(int code, struct timeval now, t_philo *th);
-void	message(char *code, struct timeval now, t_philo *th);
+void	message(char *code, struct timeval now, t_philo *th, int flag);
 void	ft_putstr_fd(char const *str, int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);

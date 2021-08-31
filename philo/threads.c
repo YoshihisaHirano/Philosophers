@@ -29,6 +29,9 @@ t_philo	*create_philo_id(t_settings *set)
 		philo_id[i - 1].set = set;
 		philo_id[i - 1].id = i;
 		philo_id[i - 1].stop = 0;
+		philo_id[i - 1].meals_no = 0;
+		if (death_mutex(&philo_id[i - 1].death_mutex))
+			return (NULL);
 		i++;
 	}
 	set->philos = philo_id;
@@ -115,7 +118,10 @@ int	start_threads(t_settings *set)
 		return (1);
 	id = create_philo_id(set);
 	if (!id)
+	{
+		free_memory(set, philos, id, NULL);
 		return (1);
+	}
 	set_timers(id);
 	output = create_threads(philos, set, id);
 	if (output)

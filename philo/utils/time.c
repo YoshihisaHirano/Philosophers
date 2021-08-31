@@ -46,7 +46,6 @@ void	set_timers(t_philo *philos_id)
 	while (i < philos_id->set->thread_no)
 	{
 		philos_id[i].time = now;
-		philos_id[i].meals_no = 0;
 		i++;
 	}
 }

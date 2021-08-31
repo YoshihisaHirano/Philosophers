@@ -44,18 +44,22 @@ int	check_death(t_settings *set)
 {
 	int				i;
 	struct timeval	curr_time;
+	t_philo			*phils;
 
 	i = 0;
+	phils = (t_philo *)(set->philos);
 	while (i < set->thread_no)
 	{
+		pthread_mutex_lock(&phils[i].death_mutex);
 		gettimeofday(&curr_time, NULL);
 		if (dead_time(curr_time, set, i) > (set->die_time))
 		{
 			pthread_mutex_lock(&set->print);
-			printf("%d %d died\n", ms(curr_time, set),
-				   i + 1);
+			printf("%d %d died\n", ms(curr_time, set), i + 1);
+//			message(DIED, curr_time, &phils[i], 1);
 			return (1);
 		}
+		pthread_mutex_unlock(&phils[i].death_mutex);
 		i++;
 	}
 	return (0);
@@ -82,6 +86,7 @@ void	*watcher_routine(void *arg)
 				philos[i].stop = 1;
 				i++;
 			}
+			usleep(50);
 			return (i_ptr);
 		}
 	}
