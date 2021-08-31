@@ -17,14 +17,16 @@ int	check_meals(t_settings *set)
 	int				res;
 	int				i;
 	struct timeval	curr_time;
+	t_philo			*philos;
 
 	res = 0;
 	i = 0;
+	philos = ((t_philo *)(set->philos));
 	if (set->must_eat == -1)
 		return (0);
 	while (i < set->thread_no)
 	{
-		if ((set->timers[i]).meals_no >= set->must_eat)
+		if (philos[i].meals_no >= set->must_eat)
 			res++;
 		i++;
 	}
@@ -47,8 +49,7 @@ int	check_death(t_settings *set)
 	while (i < set->thread_no)
 	{
 		gettimeofday(&curr_time, NULL);
-		if (dead_time(curr_time, set, i) > (set->die_time)
-			&& !set->timers[i].has_forks)
+		if (dead_time(curr_time, set, i) > (set->die_time))
 		{
 			pthread_mutex_lock(&set->print);
 			printf("%d %d died\n", ms(curr_time, set),

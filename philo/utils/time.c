@@ -25,26 +25,28 @@ int	dead_time(struct timeval curr, t_settings *set, int i)
 	long int		now_ms;
 	long int		start_ms;
 	struct timeval	start;
+	t_philo			philo;
 
-	start = set->timers[i].time;
+	philo = ((t_philo *)(set->philos))[i];
+	start = philo.time;
 	now_ms = (curr.tv_sec * (long)1000) + (curr.tv_usec / 1000);
 	start_ms = (start.tv_sec * (long)1000) + (start.tv_usec / 1000);
 	return ((int)(now_ms - start_ms));
 }
 
-void	set_timers(t_settings *set)
+void	set_timers(t_philo *philos_id)
 {
 	int				i;
 	struct timeval	now;
 
 	gettimeofday(&now, NULL);
-	set->start_time = (now.tv_sec * (long)1000) + (now.tv_usec / 1000);
+	philos_id->set->start_time = (now.tv_sec * (long)1000) +
+			(now.tv_usec / 1000);
 	i = 0;
-	while (i < set->thread_no)
+	while (i < philos_id->set->thread_no)
 	{
-		set->timers[i].time = now;
-		set->timers[i].has_forks = 0;
-		set->timers[i].meals_no = 0;
+		philos_id[i].time = now;
+		philos_id[i].meals_no = 0;
 		i++;
 	}
 }

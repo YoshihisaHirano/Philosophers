@@ -22,13 +22,6 @@
 # define SLEEP " is sleeping\n"
 # define TAKE_FORK " has taken a fork\n"
 
-typedef struct s_timer
-{
-	struct timeval	time;
-	int				has_forks;
-	int				meals_no;
-}	t_timer;
-
 typedef struct s_settings
 {
 	int				thread_no;
@@ -36,7 +29,6 @@ typedef struct s_settings
 	int				eat_time;
 	int				sleep_time;
 	int				must_eat;
-	t_timer			*timers;
 	pthread_mutex_t	*forks;
 	long int		start_time;
 	pthread_mutex_t	print;
@@ -45,9 +37,11 @@ typedef struct s_settings
 
 typedef struct s_philo
 {
-	t_settings	*set;
-	int			id;
-	int			stop;
+	t_settings		*set;
+	int				id;
+	int				stop;
+	struct timeval	time;
+	int				meals_no;
 }	t_philo;
 
 int		ft_atoi(const char *nptr);
@@ -59,8 +53,7 @@ void	*watcher_routine(void *arg);
 void	finish_threads(pthread_t *philos, t_settings *set);
 int		ms(struct timeval curr, t_settings *set);
 int		dead_time(struct timeval curr, t_settings *set, int i);
-void	set_timers(t_settings *set);
-int		create_timers(t_settings *set);
+void	set_timers(t_philo *philos_id);
 int		destroy_mutexes(t_settings *set);
 void	ft_usleep(int time);
 void	change_status(int code, struct timeval now, t_philo *th);

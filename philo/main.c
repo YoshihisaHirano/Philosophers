@@ -42,8 +42,6 @@ int	parse_args(t_settings *set, char **argv, int argc)
 		set->must_eat = args[4];
 	if (create_forks(set) > 0)
 		return (1);
-	if (create_timers(set) > 0)
-		return (1);
 	return (0);
 }
 

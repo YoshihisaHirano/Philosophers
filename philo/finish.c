@@ -14,7 +14,6 @@
 
 int	free_memory(t_settings *set, pthread_t *philo, t_philo *ids, int *res)
 {
-	free(set->timers);
 	free(philo);
 	free(ids);
 	if (res)

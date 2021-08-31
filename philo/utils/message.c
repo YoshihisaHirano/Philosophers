@@ -14,15 +14,10 @@
 
 void	change_status(int code, struct timeval now, t_philo *th)
 {
-	if (code == 1 && th->set->timers)
-	{
-		(th->set->timers)[th->id - 1].time = now;
-		(th->set->timers)[th->id - 1].has_forks = 1;
-	}
-	else if (code == 2 && th->set->timers)
-		(th->set->timers)[th->id - 1].has_forks = 0;
-	else if (code == 3 && th->set->timers)
-		(th->set->timers)[th->id - 1].meals_no++;
+	if (code == 1)
+		th->time = now;
+	else if (code == 3)
+		th->meals_no++;
 }
 
 void	message(char *code, struct timeval now, t_philo *th)

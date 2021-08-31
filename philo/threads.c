@@ -116,7 +116,7 @@ int	start_threads(t_settings *set)
 	id = create_philo_id(set);
 	if (!id)
 		return (1);
-	set_timers(set);
+	set_timers(id);
 	output = create_threads(philos, set, id);
 	if (output)
 		return (1);

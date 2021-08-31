@@ -54,26 +54,3 @@ int	destroy_mutexes(t_settings *set)
 	free(set->forks);
 	return (0);
 }
-
-int	create_timers(t_settings *set)
-{
-	t_timer	*timers;
-	int		error;
-
-	timers = malloc(sizeof(t_timer) * set->thread_no);
-	if (!timers)
-	{
-		printf("Memory allocation error\n");
-		return (1);
-	}
-	error = pthread_mutex_init(&set->print, NULL);
-	if (error)
-	{
-		printf("Mutex init error\n");
-		free(set->forks);
-		free(timers);
-		return (1);
-	}
-	set->timers = timers;
-	return (0);
-}
