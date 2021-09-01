@@ -41,7 +41,7 @@ int	create_forks(t_settings *set)
 	return (0);
 }
 
-int	death_mutex(pthread_mutex_t *mx)
+int	initialize_mutex(pthread_mutex_t *mx)
 {
 	int	error;
 

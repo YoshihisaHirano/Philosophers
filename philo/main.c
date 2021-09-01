@@ -16,6 +16,7 @@ void	settings_init(t_settings *set)
 {
 	*set = (t_settings){0};
 	set->must_eat = -1;
+	initialize_mutex(&set->print);
 }
 
 int	parse_args(t_settings *set, char **argv, int argc)

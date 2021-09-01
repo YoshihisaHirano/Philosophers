@@ -57,7 +57,7 @@ int		ms(struct timeval curr, t_settings *set);
 int		dead_time(struct timeval curr, t_settings *set, int i);
 void	set_timers(t_philo *philos_id);
 int		destroy_mutexes(t_settings *set);
-int		death_mutex(pthread_mutex_t *mx);
+int		initialize_mutex(pthread_mutex_t *mx);
 void	ft_usleep(int time);
 void	change_status(int code, struct timeval now, t_philo *th);
 void	message(char *code, struct timeval now, t_philo *th, int flag);

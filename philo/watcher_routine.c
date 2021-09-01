@@ -86,7 +86,6 @@ void	*watcher_routine(void *arg)
 				philos[i].stop = 1;
 				i++;
 			}
-			usleep(50);
 			return (i_ptr);
 		}
 	}

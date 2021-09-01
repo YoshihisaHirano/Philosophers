@@ -30,7 +30,7 @@ t_philo	*create_philo_id(t_settings *set)
 		philo_id[i - 1].id = i;
 		philo_id[i - 1].stop = 0;
 		philo_id[i - 1].meals_no = 0;
-		if (death_mutex(&philo_id[i - 1].death_mutex))
+		if (initialize_mutex(&philo_id[i - 1].death_mutex))
 			return (NULL);
 		i++;
 	}
