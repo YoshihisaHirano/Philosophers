@@ -26,6 +26,21 @@ void	sem_setup(t_settings *set)
 	sem_wait(set->all_ate);
 }
 
+void	start_philo_sem(t_philo *philo)
+{
+	char *no;
+	char *name;
+
+	no = ft_itoa(philo->id);
+	name = ft_strjoin("philo", no);
+	sem_unlink(name);
+	philo->death = sem_open(name, O_CREAT | O_EXCL, 0644, 1);
+	free(no);
+	free(name);
+	if (philo->death == SEM_FAILED)
+		error_exit(SEM_ISSUE, philo->set);
+}
+
 void	sem_start(t_settings *st)
 {
 	sem_unlink("forks");

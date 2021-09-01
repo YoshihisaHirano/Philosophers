@@ -55,7 +55,7 @@ typedef struct s_philo
 	long int		last_meal;
 	t_settings		*set;
 	int				started;
-	int				has_forks;
+	sem_t			*death;
 }	t_philo;
 
 int			ft_atoi(const char *nptr);
@@ -69,6 +69,7 @@ long int	get_time(void);
 int			ms(struct timeval curr, t_settings *set);
 void		error_exit(int code, t_settings *set);
 void		sem_start(t_settings *set);
+void		start_philo_sem(t_philo *philo);
 void		kill_processes(t_settings *set);
 void		create_processes(t_settings *set, t_philo *philos);
 void		check_meals(t_settings *set);

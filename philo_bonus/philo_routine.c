@@ -17,14 +17,14 @@ void	philo_eat(t_philo *philo)
 	sem_wait(philo->set->forks);
 	message(philo, TAKE_FORK);
 	sem_wait(philo->set->forks);
-	philo->has_forks++;
+	sem_wait(philo->death);
 	message(philo, TAKE_FORK);
-	message(philo, EAT);
 	philo->last_meal = get_time();
+	sem_post(philo->death);
+	message(philo, EAT);
 	ft_usleep(philo->set->eat_time);
 	sem_post(philo->set->forks);
 	sem_post(philo->set->forks);
-	philo->has_forks--;
 	if (philo->set->must_eat != -1)
 		philo->meals_no++;
 }

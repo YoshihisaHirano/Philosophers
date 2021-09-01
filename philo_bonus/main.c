@@ -51,7 +51,6 @@ t_philo	*create_philos(t_settings *set, t_philo	*philos)
 		philos[i - 1].meals_no = 0;
 		philos[i - 1].set = set;
 		philos[i - 1].started = 0;
-		philos[i - 1].has_forks = 0;
 		philos[i - 1].last_meal = 0;
 		i++;
 	}
