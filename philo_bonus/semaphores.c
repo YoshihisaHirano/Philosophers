@@ -28,8 +28,8 @@ void	sem_setup(t_settings *set)
 
 void	start_philo_sem(t_philo *philo)
 {
-	char *no;
-	char *name;
+	char	*no;
+	char	*name;
 
 	no = ft_itoa(philo->id);
 	name = ft_strjoin("philo", no);

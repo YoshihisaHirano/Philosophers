@@ -34,18 +34,17 @@ int	dead_time(struct timeval curr, t_settings *set, int i)
 	return ((int)(now_ms - start_ms));
 }
 
-void	set_timers(t_philo *philos_id)
+void	set_timers(t_philo *phid)
 {
 	int				i;
 	struct timeval	now;
 
 	gettimeofday(&now, NULL);
-	philos_id->set->start_time = (now.tv_sec * (long)1000) +
-			(now.tv_usec / 1000);
+	phid->set->start_time = (now.tv_sec * (long)1000) + (now.tv_usec / 1000);
 	i = 0;
-	while (i < philos_id->set->thread_no)
+	while (i < phid->set->thread_no)
 	{
-		philos_id[i].time = now;
+		phid[i].time = now;
 		i++;
 	}
 }

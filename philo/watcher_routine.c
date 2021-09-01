@@ -56,7 +56,6 @@ int	check_death(t_settings *set)
 		{
 			pthread_mutex_lock(&set->print);
 			printf("%d %d died\n", ms(curr_time, set), i + 1);
-//			message(DIED, curr_time, &phils[i], 1);
 			return (1);
 		}
 		pthread_mutex_unlock(&phils[i].death_mutex);
