@@ -33,12 +33,12 @@ void	message(char *code, struct timeval now, t_philo *th, int flag)
 	temp = ft_strjoin(str_ms, " ");
 	temp2 = ft_strjoin(temp, str_id);
 	free(temp);
+	free(str_id);
 	temp = ft_strjoin(temp2, code);
 	free(temp2);
+	free(str_ms);
 	pthread_mutex_lock(&th->set->print);
 	ft_putstr_fd(temp, 1);
 	pthread_mutex_unlock(&th->set->print);
 	free(temp);
-	free(str_ms);
-	free(str_id);
 }
