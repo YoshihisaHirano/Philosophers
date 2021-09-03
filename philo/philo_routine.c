@@ -101,7 +101,6 @@ void	eating_routine(t_philo *th)
 	change_status(2, now, th);
 	if (release_forks(th, left_fork, right_fork) > 0)
 		return ;
-	change_status(2, now, th);
 }
 
 void	*philo_routine(void *args)
