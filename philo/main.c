@@ -28,7 +28,7 @@ int	parse_args(t_settings *set, char **argv, int argc)
 	while (i < argc - 1 && i < 5)
 	{
 		args[i] = ft_atoi(argv[i + 1]);
-		if (args[i] < 0 || args[0] == 0)
+		if (args[i] <= 0 || args[0] == 0)
 		{
 			printf("Wrong format of the argument no. %d\n", i + 1);
 			return (1);
